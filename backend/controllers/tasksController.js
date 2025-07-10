@@ -17,7 +17,7 @@ exports.getTasks = async (req, res) => {
 // @route   POST /api/tasks
 // @access  Private
 exports.createTask = async (req, res) => {
-  const { title, description, status, dueDate } = req.body;
+  const { title, description, status, due_date } = req.body;
 
   try {
     const newTask = new Task({
@@ -25,7 +25,7 @@ exports.createTask = async (req, res) => {
       title,
       description,
       status,
-      dueDate,
+      dueDate: due_date,
     });
 
     const task = await newTask.save();

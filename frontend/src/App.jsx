@@ -1,4 +1,5 @@
 import React from "react";
+import "./index.css";
 import {
   BrowserRouter as Router,
   Route,
@@ -29,7 +30,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
-        <Redirect from="/" to="/dashboard" />
+        <Redirect from="/" to="/login" />
       </Switch>
     </Router>
   );

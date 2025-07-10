@@ -1,22 +1,23 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 
 // @desc    Register a new user
 // @route   POST /api/auth/register
 // @access  Public
 exports.register = async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
 
   try {
     // Check if user already exists
     let user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({ msg: 'User already exists' });
+      return res.status(400).json({ msg: "User already exists" });
     }
 
     // Create a new user
     user = new User({
+      name,
       email,
       password,
     });
@@ -46,7 +47,7 @@ exports.register = async (req, res) => {
     );
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).send("Server error");
   }
 };
 
@@ -60,13 +61,13 @@ exports.login = async (req, res) => {
     // Check if user exists
     let user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
+      return res.status(400).json({ msg: "Invalid credentials" });
     }
 
     // Compare passwords
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
+      return res.status(400).json({ msg: "Invalid credentials" });
     }
 
     // Create and return a JWT
@@ -87,6 +88,6 @@ exports.login = async (req, res) => {
     );
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).send("Server error");
   }
 };

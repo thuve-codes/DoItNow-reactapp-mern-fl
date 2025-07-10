@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useStore from "../store/useStore";
 
-const TaskForm = () => {
+const TaskForm = ({ onSuccess }) => {
   const { addTask } = useStore();
   const [formData, setFormData] = useState({
     title: "",
@@ -9,66 +9,137 @@ const TaskForm = () => {
     status: "todo",
     dueDate: "",
   });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  // Automatically set status based on due date
+  useEffect(() => {
+    if (formData.dueDate) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const dueDate = new Date(formData.dueDate);
+
+      if (dueDate < today) {
+        setFormData((prev) => ({ ...prev, status: "done" }));
+      } else {
+        setFormData((prev) => ({ ...prev, status: "todo" }));
+      }
+    }
+  }, [formData.dueDate]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setErrors({});
 
-    if (!formData.title.trim() || !formData.dueDate) {
-      alert("Title and Due Date are required.");
+    // Validation
+    const newErrors = {};
+    if (!formData.title.trim()) newErrors.title = "Title is required";
+    if (!formData.dueDate) newErrors.dueDate = "Due date is required";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setIsSubmitting(false);
       return;
     }
 
-    const newTask = {
-      ...formData,
-      title: formData.title.trim(),
-      description: formData.description.trim(),
-      dueDate: new Date(formData.dueDate).toISOString(),
-    };
+    try {
+      const taskToSend = {
+        title: formData.title.trim(),
+        description: formData.description.trim(),
+        status: formData.status,
+        due_date: formData.dueDate,
+      };
 
-    addTask(newTask);
-    setFormData({ title: "", description: "", status: "todo", dueDate: "" });
+      await addTask(taskToSend);
+
+      // Reset form
+      setFormData({
+        title: "",
+        description: "",
+        status: "todo",
+        dueDate: "",
+      });
+
+      if (onSuccess) onSuccess();
+    } catch (error) {
+      console.error("Error adding task:", error);
+      setErrors({ submit: "Failed to add task" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white p-4 rounded shadow-md mb-4"
-    >
-      <h3 className="text-xl font-semibold mb-3">Create Task</h3>
+    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
+      <h3 className="text-xl font-semibold mb-4">Create Task</h3>
 
-      <input
-        type="text"
-        placeholder="Title"
-        value={formData.title}
-        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-        className="border p-2 mb-3 w-full rounded"
-        required
-      />
+      <div className="space-y-4">
+        {/* Title Field */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Title *</label>
+          <input
+            type="text"
+            placeholder="Task title"
+            value={formData.title}
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
+            className={`border ${
+              errors.title ? "border-red-500" : "border-gray-300"
+            } p-2 w-full rounded`}
+          />
+          {errors.title && (
+            <p className="text-red-500 text-sm mt-1">{errors.title}</p>
+          )}
+        </div>
 
-      <textarea
-        placeholder="Description"
-        value={formData.description}
-        onChange={(e) =>
-          setFormData({ ...formData, description: e.target.value })
-        }
-        className="border p-2 mb-3 w-full rounded"
-        rows={3}
-      />
+        {/* Description Field */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Description</label>
+          <textarea
+            placeholder="Task description"
+            value={formData.description}
+            onChange={(e) =>
+              setFormData({ ...formData, description: e.target.value })
+            }
+            className="border border-gray-300 p-2 w-full rounded"
+            rows={3}
+          />
+        </div>
 
-      <input
-        type="date"
-        value={formData.dueDate}
-        onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
-        className="border p-2 mb-3 w-full rounded"
-        required
-      />
+        {/* Due Date Field */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Due Date *</label>
+          <input
+            type="date"
+            value={formData.dueDate}
+            onChange={(e) =>
+              setFormData({ ...formData, dueDate: e.target.value })
+            }
+            className={`border ${
+              errors.dueDate ? "border-red-500" : "border-gray-300"
+            } p-2 w-full rounded`}
+          />
+          {errors.dueDate && (
+            <p className="text-red-500 text-sm mt-1">{errors.dueDate}</p>
+          )}
+          {formData.dueDate && (
+            <p className="text-sm text-gray-600 mt-1">
+              Status will be set to: {formData.status}
+            </p>
+          )}
+        </div>
 
-      <button
-        type="submit"
-        className="bg-blue-500 text-white font-medium py-2 rounded w-full hover:bg-blue-600 transition"
-      >
-        Add Task
-      </button>
+        {/* Submit Button */}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded disabled:opacity-50"
+        >
+          {isSubmitting ? "Adding..." : "Add Task"}
+        </button>
+      </div>
     </form>
   );
 };

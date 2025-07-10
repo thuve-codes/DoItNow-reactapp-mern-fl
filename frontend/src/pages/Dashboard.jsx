@@ -80,7 +80,7 @@ const Dashboard = () => {
             <MdOutlineDashboard className="text-3xl text-indigo-600" />
             <div>
               <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
-                Task Dashboard
+                DoItNow Task Dashboard
               </h1>
               <p className="text-sm text-gray-500">
                 {taskCountByStatus.total} tasks in total
@@ -164,20 +164,7 @@ const Dashboard = () => {
               >
                 <option value="all">All Status</option>
                 <option value="todo">To Do</option>
-                <option value="in-progress">In Progress</option>
                 <option value="done">Done</option>
-              </select>
-            </div>
-
-            <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-gray-300">
-              <FiCalendar className="text-gray-500" />
-              <select
-                value={sort}
-                onChange={(e) => setSort(e.target.value)}
-                className="bg-transparent focus:outline-none"
-              >
-                <option value="due_date">Due Date</option>
-                <option value="priority">Priority</option>
               </select>
             </div>
           </div>

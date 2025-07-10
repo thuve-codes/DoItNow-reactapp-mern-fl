@@ -1,12 +1,72 @@
-# React + Vite
+# DoItNow - Task Management App (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern task management application built with React, Vite, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📝 Create, edit, and delete tasks
+- 🗓️ Automatic status detection based on due dates
+- 🔍 Filter tasks by status (To Do, Done)
+- 📅 Sort tasks by due date
+- 🔄 Real-time updates using Zustand state management
+- 🎨 Responsive design with Tailwind CSS
+- ✨ Modern UI with interactive elements
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend Framework**: React 18
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **State Management**: Zustand
+- **Routing**: React Router
+- **Icons**: React Icons
+- **Date Handling**: JavaScript Date API
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm (v8 or higher) or yarn
+
+### Installation
+
+# DoItNow - Task Management App (Frontend)
+
+![App Screenshot](/public/screenshot.png) <!-- Add your screenshot path here -->
+
+A modern task management application built with React, Vite, and Tailwind CSS.
+
+## Features
+
+- 📝 Create, edit, and delete tasks
+- 🗓️ Automatic status detection based on due dates
+- 🔍 Filter tasks by status (To Do, In Progress, Done)
+- 📅 Sort tasks by due date
+- 🔄 Real-time updates using Zustand state management
+- 🎨 Responsive design with Tailwind CSS
+- ✨ Modern UI with interactive elements
+
+## Technologies Used
+
+- **Frontend Framework**: React 18
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **State Management**: Zustand
+- **Routing**: React Router
+- **Icons**: React Icons
+- **Date Handling**: JavaScript Date API
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm (v8 or higher) or yarn
+
+### Installation
+
+1. Clone the repository
+2. Navigate to the project directory
+3. Install dependencies
+4. Running the App : npm run dev

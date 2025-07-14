@@ -77,8 +77,9 @@ const TaskForm = ({ onSuccess }) => {
       <div className="space-y-4">
         {/* Title Field */}
         <div>
-          <label className="block text-sm font-medium mb-1">Title *</label>
+          <label htmlFor="title" className="block text-sm font-medium mb-1">Title *</label>
           <input
+            id="title"
             type="text"
             placeholder="Task title"
             value={formData.title}
@@ -96,8 +97,9 @@ const TaskForm = ({ onSuccess }) => {
 
         {/* Description Field */}
         <div>
-          <label className="block text-sm font-medium mb-1">Description</label>
+          <label htmlFor="description" className="block text-sm font-medium mb-1">Description</label>
           <textarea
+            id="description"
             placeholder="Task description"
             value={formData.description}
             onChange={(e) =>
@@ -110,8 +112,9 @@ const TaskForm = ({ onSuccess }) => {
 
         {/* Due Date Field */}
         <div>
-          <label className="block text-sm font-medium mb-1">Due Date *</label>
+          <label htmlFor="dueDate" className="block text-sm font-medium mb-1">Due Date *</label>
           <input
+            id="dueDate"
             type="date"
             value={formData.dueDate}
             onChange={(e) =>

@@ -55,12 +55,6 @@ Make sure to:
 
 ---
 
-## 🌍 Live Demo
-
-[🔗 View Deployed App](https://your-deployed-url.com)
-
----
-
 ## 🐳 Docker Support
 
 If Docker is enabled, you can run the entire stack with:

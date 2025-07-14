@@ -1,11 +1,10 @@
-// Import dependencies
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const connectDB = require('./config/db');
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const connectDB = require("./config/db");
 
 // Load environment variables
-dotenv.config({ path: './config/.env' });
+dotenv.config({ path: "./config/.env" });
 
 // Connect to database
 connectDB();
@@ -18,8 +17,8 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/tasks', require('./routes/tasks'));
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/tasks", require("./routes/tasks"));
 
 // Define port
 const PORT = process.env.PORT || 5000;

@@ -61,12 +61,6 @@ Make sure to:
 
 ---
 
-## 🧪 Testing Setup
-
-Instructions for unit/integration tests can be found in the respective `README.md` files.
-
----
-
 ## 🐳 Docker Support
 
 If Docker is enabled, you can run the entire stack with:

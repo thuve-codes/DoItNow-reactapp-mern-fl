@@ -23,20 +23,17 @@ Each folder contains its own `README.md` with detailed setup instructions.
 - 🔍 Filter and sort tasks by status/date
 - 📦 Modular REST API with Express
 - 🌈 Responsive UI using Tailwind CSS
-- 🧠 State management with Context API / Zustand
-- 🌐 Live deployed version (optional)
 
 ---
 
 ## ⚙️ Tech Stack
 
-| Layer    | Technology                          |
-| -------- | ----------------------------------- |
-| Frontend | React (Vite), Tailwind CSS          |
-| Backend  | Node.js, Express.js                 |
-| Database | MongoDB + Mongoose                  |
-| Auth     | JWT (JSON Web Tokens)               |
-| Hosting  | Vercel (frontend), Render (backend) |
+| Layer    | Technology                 |
+| -------- | -------------------------- |
+| Frontend | React (Vite), Tailwind CSS |
+| Backend  | Node.js, Express.js        |
+| Database | MongoDB + Mongoose         |
+| Auth     | JWT (JSON Web Tokens)      |
 
 ---
 
